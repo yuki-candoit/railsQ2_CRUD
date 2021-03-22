@@ -12,6 +12,23 @@ class UsersController < ApplicationController
     User.create(user_params)
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+  def update
+    user = User.find(params[:id])
+    user.update(user_params)
+    # 以下のメソッドを追加
+    redirect_to action: :index
+  end
+
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    # 以下のメソッドを追加
+    redirect_to action: :index
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :age)
